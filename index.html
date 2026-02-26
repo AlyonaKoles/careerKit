@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Kit · полноценный сайт</title>
+    <!-- Google Font & simple icons via Font Awesome 6 (free) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ==== ГЛОБАЛЬНЫЕ СТИЛИ (ПОЛНОСТЬЮ С ГЛАВНОЙ) ==== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #F5F7FB;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        /* main app card – clean, big radius, soft shadow */
+        .app-screen {
+            max-width: 1320px;
+            width: 100%;
+            background-color: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -8px rgba(0, 10, 30, 0.08), 0 8px 16px -6px rgba(0,0,0,0.02);
+            padding: 28px 32px;
+            transition: all 0.2s;
+        }
+
+        /* --- top navigation --- */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            background: linear-gradient(145deg, #1A2E45, #0F1E2F);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 6px 12px -6px rgba(26,46,69,0.2);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: -0.5px;
+            color: #121926;
+        }
+        .logo-text span {
+            color: #3A7B7B;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #4B5E6B;
+            font-size: 15px;
+            font-weight: 500;
+            transition: 0.15s;
+            cursor: pointer;
+        }
+        .nav-links a:hover {
+            color: #1D4444;
+        }
+        .nav-links a.active {
+            color: #1A2E45;
+            font-weight: 600;
+            border-bottom: 2px solid #3A7B7B;
+            padding-bottom: 6px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .avatar {
+            background-color: #E9EDF2;
+            border-radius: 40px;
+            padding: 6px 12px 6px 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #1F2A3E;
+        }
+        .avatar i {
+            color: #3A7B7B;
+            font-size: 14px;
+        }
+
+        /* общие заголовки */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .page-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #0F1A2A;
+        }
+
+        /* badge как на главной */
+        .badge-tip {
+            background-color: #F2F6EA;
+            color: #3C6E4F;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* карточки, кнопки, инпуты в том же стиле */
+        .search-section {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .search-input {
+            flex: 1;
+            background-color: #F5F7FB;
+            border: 1px solid #E6EBEF;
+            border-radius: 24px;
+            padding: 16px 24px;
+            font-size: 15px;
+            color: #1F2A3E;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #3A7B7B;
+        }
+
+        .button-primary {
+            background-color: #3A7B7B;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 14px 32px;
+            font-weight: 600;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .button-outline {
+            background-color: white;
+            border: 1px solid #E6EBEF;
+            border-radius: 40px;
+            padding: 12px 24px;
+            font-weight: 500;
+            color: #1B2E3F;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+        .filter-pill {
+            background-color: #F5F7FB;
+            border: 1px solid #E6EBEF;
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4B5E6B;
+            cursor: pointer;
+        }
+
+        /* карточка вакансии */
+        .vacancy-card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 12px;
+            border: 1px solid #F0F3F7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.1s;
+        }
+        .vacancy-card:hover {
+            border-color: #C6D9D9;
+            box-shadow: 0 8px 18px rgba(58,123,123,0.06);
+        }
+
+        .match-badge {
+            background-color: #E5F2E5;
+            color: #226644;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 100px;
+        }
+
+        .skill-tag {
+            background-color: #EDF2F5;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 40px;
+            color: #3B5668;
+            font-weight: 500;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        /* сетки */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        /* карточка арсенала */
+        .asset-card {
+            background: white;
+            border: 1px solid #F0F3F7;
+            border-radius: 20px;
+            padding: 16px;
+        }
+        .asset-preview {
+            background-color: #F0F4F7;
+            height: 120px;
+            border-radius: 16px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8F9EA8;
+        }
+
+        /* табы */
+        .tabs-mini {
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid #EFF3F6;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+        .tab-mini {
+            padding: 8px 16px;
+            font-weight: 500;
+            color: #4B5E6B;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .tab-mini.active {
+            background-color: #E9F2F2;
+            color: #1A2E45;
+        }
+
+        /* skills cloud */
+        .skills-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        /* футер */
+        .footer-note {
+            display: flex;
+            justify-content: flex-end;
+            color: #8C9CA5;
+            font-size: 13px;
+            gap: 24px;
+            margin-top: 24px;
+            border-top: 1px solid #EFF3F6;
+            padding-top: 20px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #EFF3F6;
+            margin: 24px 0 16px;
+        }
+
+        /* Hello & date row (для главной) */
+        .welcome-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .greet h1 {
+            font-size: 26px;
+            font-weight: 600;
+            color: #0F1A2A;
+            margin-bottom: 6px;
+        }
+        .greet p {
+            color: #60707A;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* today focus */
+        .today-focus {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+        .deadline-card {
+            background: linear-gradient(105deg, #F9FBFC 0%, #FFFFFF 100%);
+            border: 1px solid #E9EDF2;
+            border-radius: 24px;
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .deadline-icon {
+            background-color: #FFE9E6;
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #C7423A;
+            font-size: 24px;
+        }
+        .deadline-text {
+            flex: 1;
+            margin-left: 18px;
+        }
+        .deadline-text h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1D2B39;
+        }
+        .deadline-text p {
+            font-size: 14px;
+            color: #5C6F7E;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+        .deadline-time {
+            background-color: #F1F3F5;
+            border-radius: 40px;
+            padding: 8px 16px;
+            font-weight: 700;
+            font-size: 15px;
+            color: #0F1A2A;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .new-vacancies {
+            background-color: #EFF8F4;
+            border-radius: 24px;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #D3E4DE;
+        }
+        .vac-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .vac-text span {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1F5E5E;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .vac-text h3 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #0C3636;
+            margin-top: 2px;
+        }
+        .vac-text p {
+            color: #3B6B6B;
+            font-size: 14px;
+        }
+        .vac-icon {
+            background-color: white;
+            padding: 12px;
+            border-radius: 50%;
+            color: #1C5E5E;
+            font-size: 20px;
+            box-shadow: 0 6px 14px rgba(58,123,123,0.08);
+        }
+
+        /* kanban board */
+        .kanban-board {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+        .column {
+            background-color: #F8FAFD;
+            border-radius: 20px;
+            padding: 18px 16px;
+            border: 1px solid #EBEFF2;
+        }
+        .column-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        .col-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #1C2E3F;
+        }
+        .col-title i {
+            color: #3A7B7B;
+            font-size: 15px;
+        }
+        .count-badge {
+            background-color: #DDE4EA;
+            border-radius: 40px;
+            padding: 3px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1F3A4C;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+            border: 1px solid #F0F3F7;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .company {
+            font-weight: 700;
+            color: #121F2C;
+            font-size: 15px;
+        }
+
+        .role {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1F3C4C;
+            margin-bottom: 10px;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .action-item {
+            background-color: white;
+            border: 1px solid #E6EBEF;
+            border-radius: 18px;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 600;
+            color: #1B2E3F;
+            cursor: pointer;
+        }
+
+        .arsenal-mini {
+            background-color: #F9FCFC;
+            border-radius: 24px;
+            padding: 20px 24px;
+            margin-top: 8px;
+            border: 1px solid #E0ECEC;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .arsenal-stats {
+            display: flex;
+            gap: 36px;
+        }
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #14242F;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: #556C78;
+            margin-top: 4px;
+        }
+        .add-button {
+            background-color: #3A7B7B;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 26px;
+            border-radius: 40px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        /* все страницы скрыты, показывается только активная */
+        .page {
+            display: none;
+        }
+        .page.active-page {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-screen">
+        <!-- навигация (кликабельные ссылки) -->
+        <div class="nav-bar">
+            <div class="logo-area" onclick="showPage('home')">
+                <div class="logo-icon"><i class="fas fa-suitcase"></i></div>
+                <div class="logo-text">career<span>kit</span></div>
+            </div>
+            <div class="nav-links">
+                <a onclick="showPage('home')" id="nav-home" class="active">Главная</a>
+                <a onclick="showPage('search')" id="nav-search">Поиск</a>
+                <a onclick="showPage('arsenal')" id="nav-arsenal">Мой арсенал</a>
+                <a onclick="showPage('templates')" id="nav-templates">Шаблоны</a>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user-circle"></i> Алексей К.
+                    <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== СТРАНИЦА ГЛАВНАЯ ========== -->
+        <div id="home" class="page active-page">
+            <!-- welcome + smart tip -->
+            <div class="welcome-row">
+                <div class="greet">
+                    <h1>Привет, Алексей 👋</h1>
+                    <p><i class="far fa-calendar-alt" style="color: #3A7B7B;"></i> 12 февраля, среда · активный поиск</p>
+                </div>
+                <div class="badge-tip">
+                    <i class="fas fa-robot"></i> По твоим навыкам сейчас 8 подходящих вакансий
+                </div>
+            </div>
+
+            <!-- TODAY FOCUS: deadline + new vacancies -->
+            <div class="today-focus">
+                <div class="deadline-card">
+                    <div class="deadline-icon"><i class="fas fa-hourglass-half"></i></div>
+                    <div class="deadline-text">
+                        <h4>🔥 Дедлайн тестового</h4>
+                        <p>VK · позиция «Младший контент-мейкер»</p>
+                    </div>
+                    <div class="deadline-time"><i class="far fa-clock"></i> сегодня, 18:00</div>
+                </div>
+                <div class="new-vacancies">
+                    <div class="vac-text">
+                        <span><i class="fas fa-bolt"></i> умный алерт</span>
+                        <h3>+3 новые</h3>
+                        <p>стажировки · дизайн / монтаж</p>
+                    </div>
+                    <div class="vac-icon"><i class="fas fa-briefcase"></i></div>
+                </div>
+            </div>
+
+            <!-- kanban section – Мои отклики -->
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
+                <h2 style="font-size: 20px; font-weight: 600;"><i class="fas fa-list-check" style="margin-right: 8px; color: #1D5B5B;"></i> Мои отклики</h2>
+                <a style="color: #3A7B7B; font-size: 15px; font-weight: 600; cursor: pointer;">Смотреть всю доску <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Kanban board -->
+            <div class="kanban-board">
+                <!-- колонка 1: Откликнулся -->
+                <div class="column">
+                    <div class="column-header"><span class="col-title"><i class="fas fa-paper-plane"></i> Откликнулся</span><span class="count-badge">3</span></div>
+                    <div class="card"><div class="card-header"><span class="company">Smetana.media</span><span class="match-badge">92% совп.</span></div><div class="role">SMM-стажёр (удалённо)</div><div class="skills"><span class="skill-tag">копирайтинг</span><span class="skill-tag">Reels</span></div></div>
+                    <div class="card"><div class="card-header"><span class="company">Creative Lab</span><span class="match-badge">86% совп.</span></div><div class="role">Ассистент видеомонтажёра</div><div><span class="skill-tag">Premiere Pro</span><span class="skill-tag">After Effects</span></div></div>
+                    <div class="card"><div class="card-header"><span class="company">VK</span><span class="match-badge">95% совп.</span></div><div class="role">Контент-стажёр (сообщества)</div><div><span class="skill-tag">VK SMM</span><span class="skill-tag">аналитика</span></div></div>
+                </div>
+                <!-- колонка 2: Тестовое -->
+                <div class="column">
+                    <div class="column-header"><span class="col-title"><i class="fas fa-pen-ruler"></i> Тестовое</span><span class="count-badge">2</span></div>
+                    <div class="card" style="background-color: #FDF6E3; border-left: 4px solid #E68A2E;"><div class="card-header"><span class="company">VK</span><span class="match-badge" style="background-color: #FFE4C4;">⚡ дедлайн</span></div><div class="role">Кейс: креатив для сообщества</div><div><span class="skill-tag">копирайтинг</span><span class="skill-tag">дизайн</span></div></div>
+                    <div class="card"><div class="card-header"><span class="company">Яндекс.Практикум</span><span class="match-badge">79% совп.</span></div><div class="role">Тестовое: промо-лендинг</div><div><span class="skill-tag">Tilda</span><span class="skill-tag">верстка</span></div></div>
+                </div>
+                <!-- колонка 3: Собеседование / Оффер -->
+                <div class="column">
+                    <div class="column-header"><span class="col-title"><i class="fas fa-chat"></i> Собеседование</span><span class="count-badge">2</span></div>
+                    <div class="card"><div class="card-header"><span class="company">Skillbox</span><span class="match-badge">89% совп.</span></div><div class="role">Куратор студенческих проектов</div><div><span class="skill-tag">обучение</span><span class="skill-tag">фидбек</span></div></div>
+                    <div class="card"><div class="card-header"><span class="company">Red Collar</span><span class="match-badge">—</span></div><div class="role">Junior project manager</div><div><span class="skill-tag">коммуникация</span><span class="skill-tag">Jira</span></div></div>
+                </div>
+            </div>
+
+            <!-- Quick actions -->
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="quick-actions">
+                    <div class="action-item"><i class="fas fa-archive"></i> Мой арсенал</div>
+                    <div class="action-item"><i class="fas fa-plus-circle"></i> Добавить проект / актив</div>
+                    <div class="action-item"><i class="fas fa-magnifying-glass"></i> Быстрый поиск вакансий</div>
+                </div>
+                <span style="background-color: #EDF8F8; border-radius: 100px; padding: 8px 18px; color: #0D4C4C;"><i class="fas fa-wand-magic-sparkles"></i> Собрать отклик под вакансию</span>
+            </div>
+
+            <!-- Arsenal mini profile -->
+            <div class="arsenal-mini">
+                <div><span style="font-weight: 600;">⚙️ Мой арсенал</span> <span style="background: #DBE7E7; padding:6px 16px; border-radius:40px;">14 навыков · 9 проектов</span></div>
+                <div class="arsenal-stats"><div class="stat-item"><span class="stat-value">8</span><span class="stat-label">активных</span></div><div class="stat-item"><span class="stat-value">5</span><span class="stat-label">проектов</span></div></div>
+                <div class="add-button"><i class="fas fa-file-circle-plus"></i> Добавить актив</div>
+            </div>
+            <hr>
+            <div class="footer-note"><span><i class="fas fa-circle-check" style="color:#3A7B7B;"></i> 75% откликов с кастомизацией → тестовое</span><span><i class="fas fa-bell"></i> Уведомления включены</span></div>
+        </div>
+
+        <!-- ========== СТРАНИЦА ПОИСКА ========== -->
+        <div id="search" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-magnifying-glass" style="color: #3A7B7B; margin-right: 10px;"></i> Поиск вакансий</h2>
+                <span class="badge-tip"><i class="fas fa-bell"></i> 12 новых за сегодня</span>
+            </div>
+
+            <div class="search-section">
+                <input type="text" class="search-input" placeholder="Должность, ключевые навыки, компания..." value="стажёр">
+                <button class="button-primary"><i class="fas fa-search"></i> Найти</button>
+            </div>
+
+            <div class="filter-bar">
+                <span class="filter-pill">Все сферы <i class="fas fa-chevron-down"></i></span>
+                <span class="filter-pill">Уровень: стажёр</span>
+                <span class="filter-pill">Занятость: любая</span>
+                <span class="filter-pill">Удалённая работа</span>
+                <span class="filter-pill">Зарплата</span>
+                <span class="filter-pill">Ещё фильтры</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                <span class="badge-tip"><i class="fas fa-list"></i> Найдено 24 вакансии</span>
+                <span class="button-outline"><i class="fas fa-arrow-up-wide-short"></i> Сортировка</span>
+            </div>
+
+            <div class="vacancy-card">
+                <div><div style="display: flex; gap:10px; margin-bottom:6px;"><span class="company" style="font-weight:700;">VK</span><span class="match-badge"><i class="fas fa-bolt"></i> 95% совпад.</span></div><div class="role">Младший контент-мейкер</div><div><span class="skill-tag">копирайтинг</span><span class="skill-tag">Reels</span><span class="skill-tag">аналитика</span></div></div>
+                <div class="button-outline" style="padding:8px 20px;"><i class="fas fa-file-signature"></i> Собрать отклик</div>
+            </div>
+            <div class="vacancy-card">
+                <div><div style="display: flex; gap:10px;"><span class="company">Creative Lab</span><span class="match-badge">86% совп.</span></div><div class="role">Ассистент видеомонтажёра</div><div><span class="skill-tag">Premiere Pro</span><span class="skill-tag">After Effects</span></div></div>
+                <div class="button-outline"><i class="fas fa-file-signature"></i> Собрать</div>
+            </div>
+            <div class="vacancy-card">
+                <div><div style="display: flex; gap:10px;"><span class="company">Smetana.media</span><span class="match-badge">78% совп.</span></div><div class="role">SMM-стажёр (удалённо)</div><div><span class="skill-tag">SMM</span><span class="skill-tag">дизайн</span></div></div>
+                <div class="button-outline"><i class="fas fa-file-signature"></i> Собрать</div>
+            </div>
+
+            <div style="display: flex; gap: 8px; justify-content: center; margin: 30px 0 10px;">
+                <span class="filter-pill" style="background-color:#3A7B7B; color:white;">1</span>
+                <span class="filter-pill">2</span><span class="filter-pill">3</span><span class="filter-pill">4</span><span class="filter-pill">5</span>
+            </div>
+            <hr>
+            <div class="footer-note"><span><i class="fas fa-chart-line"></i> 8 вакансий с высоким совпадением</span><span><i class="fas fa-clock"></i> обновлено 5 мин назад</span></div>
+        </div>
+
+        <!-- ========== СТРАНИЦА МОЙ АРСЕНАЛ ========== -->
+        <div id="arsenal" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-archive" style="color: #3A7B7B; margin-right: 10px;"></i> Мой арсенал</h2>
+                <span class="badge-tip"><i class="fas fa-pen"></i> 14 навыков · 9 проектов</span>
+            </div>
+
+            <div class="tabs-mini">
+                <span class="tab-mini active">Навыки</span>
+                <span class="tab-mini">Проекты (активы)</span>
+                <span class="tab-mini">Профиль</span>
+                <span style="flex:1;"></span>
+                <span class="button-outline" style="padding:6px 18px;"><i class="fas fa-plus"></i> Добавить навык</span>
+            </div>
+
+            <div class="skills-cloud">
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">копирайтинг</span>
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">SMM</span>
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">Premiere Pro</span>
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">After Effects</span>
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">Figma</span>
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">Photoshop</span>
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">аналитика</span>
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">коммуникация</span>
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">HTML/CSS</span>
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">Tilda</span>
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">Jira</span>
+                <span class="skill-tag" style="font-size:13px; padding:8px 18px;">Python (база)</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin: 24px 0 16px;">
+                <h3 style="font-size:18px;"><i class="fas fa-folder-open" style="color:#1D5B5B;"></i> Проекты (9)</h3>
+                <span class="button-outline"><i class="fas fa-plus"></i> Добавить проект</span>
+            </div>
+
+            <div class="grid-3">
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-image fa-2x"></i></div><div><strong>Редизайн лендинга</strong></div><div><span class="skill-tag">Figma</span><span class="skill-tag">UI</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-video fa-2x"></i></div><div><strong>Промо-ролик для студии</strong></div><div><span class="skill-tag">Premiere</span><span class="skill-tag">звук</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-file-lines fa-2x"></i></div><div><strong>Копирайтинг для блога</strong></div><div><span class="skill-tag">тексты</span><span class="skill-tag">SMM</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-chart-simple fa-2x"></i></div><div><strong>Аналитика VK сообщества</strong></div><div><span class="skill-tag">Excel</span><span class="skill-tag">data</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-code fa-2x"></i></div><div><strong>Сайт на Tilda</strong></div><div><span class="skill-tag">Tilda</span><span class="skill-tag">HTML</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-microphone fa-2x"></i></div><div><strong>Интервью с экспертом</strong></div><div><span class="skill-tag">видео</span><span class="skill-tag">монтаж</span></div></div>
+            </div>
+            <hr>
+            <div class="footer-note"><span><i class="fas fa-chart-simple"></i> 5 проектов в портфолио</span><span><i class="fas fa-clock"></i> последнее обновление вчера</span></div>
+        </div>
+
+        <!-- ========== СТРАНИЦА ШАБЛОНЫ И ГАЙДЫ ========== -->
+        <div id="templates" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-copy" style="color: #3A7B7B; margin-right: 10px;"></i> Шаблоны и гайды</h2>
+                <span class="badge-tip"><i class="fas fa-star"></i> 24 шаблона · 12 гайдов</span>
+            </div>
+
+            <div class="search-section">
+                <input type="text" class="search-input" placeholder="Поиск шаблонов, резюме, сопроводительных...">
+                <button class="button-primary"><i class="fas fa-search"></i> Найти</button>
+            </div>
+
+            <div class="filter-bar">
+                <span class="filter-pill" style="background-color:#3A7B7B; color:white;">Все</span>
+                <span class="filter-pill">Резюме</span>
+                <span class="filter-pill">Сопроводительные</span>
+                <span class="filter-pill">Портфолио</span>
+                <span class="filter-pill">Тестовые задания</span>
+                <span class="filter-pill">Гайды</span>
+            </div>
+
+            <h3 style="margin: 24px 0 16px;">🔥 Популярные шаблоны</h3>
+            <div style="display: grid; grid-template-columns: repeat(4,1fr); gap:20px;">
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-file-pdf fa-2x"></i></div><div><strong>Универсальное резюме</strong></div><div><span class="skill-tag">docx</span><span class="skill-tag">canva</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-envelope fa-2x"></i></div><div><strong>Cover Letter · маркетинг</strong></div><div><span class="skill-tag">текст</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-images fa-2x"></i></div><div><strong>Портфолио · сетка</strong></div><div><span class="skill-tag">figma</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-briefcase fa-2x"></i></div><div><strong>Кейс-стади структура</strong></div><div><span class="skill-tag">шаблон</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-chart-bar fa-2x"></i></div><div><strong>Резюме аналитика</strong></div><div><span class="skill-tag">data</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-pen-fancy fa-2x"></i></div><div><strong>Сопроводительное краткое</strong></div><div><span class="skill-tag">стартапы</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-tasks fa-2x"></i></div><div><strong>План тестового SMM</strong></div><div><span class="skill-tag">копирайтинг</span></div></div>
+                <div class="asset-card"><div class="asset-preview"><i class="fas fa-slideshow fa-2x"></i></div><div><strong>Презентация проектов</strong></div><div><span class="skill-tag">PDF</span></div></div>
+            </div>
+
+            <h3 style="margin: 32px 0 16px;"><i class="fas fa-graduation-cap" style="color:#1D5B5B;"></i> Полезные гайды</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="vacancy-card" style="justify-content: space-between;"><span><i class="fas fa-file-lines"></i> Как описать учебный проект в резюме</span><span class="badge-tip">15 мин</span></div>
+                <div class="vacancy-card"><span><i class="fas fa-file-lines"></i> Что писать в сопроводительном стажёру</span><span class="badge-tip">10 мин</span></div>
+                <div class="vacancy-card"><span><i class="fas fa-file-lines"></i> 5 ошибок в портфолио начинающих</span><span class="badge-tip">8 мин</span></div>
+                <div class="vacancy-card"><span><i class="fas fa-file-lines"></i> Как проходить тестовые задания быстрее</span><span class="badge-tip">12 мин</span></div>
+            </div>
+            <hr>
+            <div class="footer-note"><span><i class="fas fa-rotate"></i> 每周 обновление</span><span>📚 36 материалов</span></div>
+        </div>
+    </div>
+
+    <!-- скрипт переключения страниц -->
+    <script>
+        function showPage(pageId) {
+            // скрыть все страницы
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active-page');
+            });
+            // показать выбранную
+            document.getElementById(pageId).classList.add('active-page');
+
+            // обновить активный класс в навигации
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            if (pageId === 'home') document.getElementById('nav-home').classList.add('active');
+            if (pageId === 'search') document.getElementById('nav-search').classList.add('active');
+            if (pageId === 'arsenal') document.getElementById('nav-arsenal').classList.add('active');
+            if (pageId === 'templates') document.getElementById('nav-templates').classList.add('active');
+        }
+    </script>
+</body>
+</html>
